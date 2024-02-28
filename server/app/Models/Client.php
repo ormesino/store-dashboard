@@ -11,4 +11,9 @@ class Client extends Model
     
     protected $fillable = ['name', 'email', 'phone', 'password', 'cpf'];
     protected $hidden = ['password'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
