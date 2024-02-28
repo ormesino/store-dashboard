@@ -13,7 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::filter()->get();
         return response()->json($clients);
     }
 

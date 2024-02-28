@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::filter()->get();
         return response()->json($orders);
     }
 
