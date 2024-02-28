@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,12 @@ use App\Http\Controllers\AuthController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/clients', [ClientController::class, 'store']);
+Route::get('/clients', [ClientController::class, 'index']);
+Route::get('/clients/{id}', [ClientController::class, 'show']);
+Route::put('/clients/{id}', [ClientController::class, 'update']);
+Route::delete('/clients/{id}', [ClientController::class, 'destroy']);
 
 Route::group([
     'middleware' => 'api',
