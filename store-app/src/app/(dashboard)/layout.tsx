@@ -1,3 +1,5 @@
+"use client";
+
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -19,6 +21,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import Link from "next/link";
 import * as React from "react";
 
 const drawerWidth: number = 240;
@@ -71,7 +74,11 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -124,25 +131,30 @@ export default function Dashboard() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton>
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Clientes" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <LocalMallIcon />
-            </ListItemIcon>
-            <ListItemText primary="Produtos" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <ReceiptIcon />
-            </ListItemIcon>
-            <ListItemText primary="Pedidos" />
-          </ListItemButton>
-          <Divider />
+          <Link href="/clients">
+            <ListItemButton>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Clientes" />
+            </ListItemButton>
+          </Link>
+          <Link href="/products">
+            <ListItemButton>
+              <ListItemIcon>
+                <LocalMallIcon />
+              </ListItemIcon>
+              <ListItemText primary="Produtos" />
+            </ListItemButton>
+          </Link>
+          <Link href="/orders">
+            <ListItemButton>
+              <ListItemIcon>
+                <ReceiptIcon />
+              </ListItemIcon>
+              <ListItemText primary="Pedidos" />
+            </ListItemButton>
+          </Link>
           <ListItemButton>
             <ListItemIcon>
               <LogoutIcon />
@@ -165,7 +177,9 @@ export default function Dashboard() {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}></Grid>
+          <Grid container spacing={3}>
+            {children}
+          </Grid>
         </Container>
       </Box>
     </Box>
