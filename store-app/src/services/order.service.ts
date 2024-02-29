@@ -6,6 +6,11 @@ export const getOrders = async (): Promise<OrderDto[]> => {
   return await response.json();
 };
 
+export const getOrder = async (id: string): Promise<OrderModel> => {
+  const response = await fetch(`http://localhost:8000/api/orders/${id}`);
+  return await response.json();
+};
+
 export const deleteOrder = async (id: number): Promise<void> => {
   await fetch(`http://localhost:8000/api/orders/${id}`, {
     method: "DELETE",
@@ -22,7 +27,7 @@ export const createOrder = async (order: OrderModel): Promise<void> => {
   });
 };
 
-export const updateOrder = async (id: number, order: OrderModel): Promise<void> => {
+export const updateOrder = async (id: string, order: OrderModel): Promise<void> => {
   await fetch(`http://localhost:8000/api/orders/${id}`, {
     method: "PUT",
     headers: {

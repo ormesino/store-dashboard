@@ -9,23 +9,25 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useRouter } from "next/navigation";
 import DeleteModal from "../delete-modal";
 
 export default function ContentTable({
   data,
   handleContent,
   handleDelete,
-  handleFormDialog,
-  handleUpdate,
   header,
+  url,
 }: {
   data: Array<Object>;
   handleContent: Function;
   handleDelete: Function;
-  handleFormDialog: Function;
-  handleUpdate: Function;
   header: Array<string>;
+  url: string;
 }) {
+
+  const router = useRouter();
+
   return (
     <TableContainer component={Paper} sx={{maxHeight: 600}}>
       <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
@@ -46,8 +48,7 @@ export default function ContentTable({
               <TableCell key="actions">
                 <IconButton
                   onClick={() => {
-                    handleFormDialog(true)
-                    handleUpdate(row)
+                    router.push(`${url}/edit/${Object.values(row)[0]}`);
                   }}
                   aria-label="edit"
                   color="warning"

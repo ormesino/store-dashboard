@@ -3,4 +3,5 @@ export type OrderModel = {
   product_id: number;
   quantity: number;
   total: number;
+  status?: string;
 }
