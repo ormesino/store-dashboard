@@ -129,7 +129,13 @@ export default function Dashboard({
         </Toolbar>
         <Divider />
         <List component="nav">
-          <Link href="/client">
+          <Link
+            href="/client"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
             <ListItemButton>
               <ListItemIcon>
                 <PeopleIcon />
@@ -137,7 +143,13 @@ export default function Dashboard({
               <ListItemText primary="Clientes" />
             </ListItemButton>
           </Link>
-          <Link href="/product">
+          <Link
+            href="/product"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
             <ListItemButton>
               <ListItemIcon>
                 <LocalMallIcon />
@@ -145,7 +157,13 @@ export default function Dashboard({
               <ListItemText primary="Produtos" />
             </ListItemButton>
           </Link>
-          <Link href="/order">
+          <Link
+            href="/order"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
             <ListItemButton>
               <ListItemIcon>
                 <ReceiptIcon />

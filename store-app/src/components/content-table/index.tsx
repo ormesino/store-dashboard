@@ -16,12 +16,14 @@ export default function ContentTable({
   handleContent,
   handleDelete,
   handleFormDialog,
+  handleUpdate,
   header,
 }: {
   data: Array<Object>;
   handleContent: Function;
   handleDelete: Function;
   handleFormDialog: Function;
+  handleUpdate: Function;
   header: Array<string>;
 }) {
   return (
@@ -43,7 +45,10 @@ export default function ContentTable({
               ))}
               <TableCell key="actions">
                 <IconButton
-                  onClick={() => handleFormDialog(true)}
+                  onClick={() => {
+                    handleFormDialog(true)
+                    handleUpdate(row)
+                  }}
                   aria-label="edit"
                   color="warning"
                 >

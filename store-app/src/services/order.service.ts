@@ -21,3 +21,13 @@ export const createOrder = async (order: OrderModel): Promise<void> => {
     body: JSON.stringify(order),
   });
 };
+
+export const updateOrder = async (id: number, order: OrderModel): Promise<void> => {
+  await fetch(`http://localhost:8000/api/orders/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(order),
+  });
+};

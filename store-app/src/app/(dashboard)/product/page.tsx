@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 
 export default function ProductView() {
   const [products, setProducts] = useState<ProductDto[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<ProductDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
@@ -81,6 +82,7 @@ export default function ProductView() {
                     type="text"
                     fullWidth
                     variant="outlined"
+                    value={selectedProduct?.name}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -93,6 +95,7 @@ export default function ProductView() {
                     type="text"
                     fullWidth
                     variant="outlined"
+                    value={selectedProduct?.price}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -102,6 +105,7 @@ export default function ProductView() {
                     multiline
                     fullWidth
                     rows={4}
+                    value={selectedProduct?.description}
                   />
                 </Grid>
               </Grid>
@@ -111,9 +115,15 @@ export default function ProductView() {
             <Button onClick={() => setOpen(false)} variant="outlined">
               Voltar
             </Button>
-            <Button type="submit" variant="contained" color="success">
-              Cadastrar
-            </Button>
+            {selectedProduct ? (
+              <Button type="submit" variant="contained" color="warning">
+                Atualizar
+              </Button>
+            ) : (
+              <Button type="submit" variant="contained" color="success">
+                Cadastrar
+              </Button>
+            )}
           </DialogActions>
         </Dialog>
       </Dialog>
@@ -141,6 +151,7 @@ export default function ProductView() {
             handleContent={setProducts}
             handleDelete={deleteProduct}
             handleFormDialog={setOpen}
+            handleUpdate={setSelectedProduct}
           />
 
           <Button

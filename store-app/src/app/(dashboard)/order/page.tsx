@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 export default function OrderView() {
   const [orders, setOrders] = useState<OrderDto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOrder, setSelectedOrder] = useState<OrderDto | null>(null);
   const [open, setOpen] = useState(false);
 
   const titles = [
@@ -139,9 +140,15 @@ export default function OrderView() {
             <Button onClick={() => setOpen(false)} variant="outlined">
               Voltar
             </Button>
-            <Button type="submit" variant="contained" color="success">
-              Cadastrar
-            </Button>
+            {selectedOrder ? (
+              <Button type="submit" variant="contained" color="warning">
+                Atualizar
+              </Button>
+            ) : (
+              <Button type="submit" variant="contained" color="success">
+                Cadastrar
+              </Button>
+            )}
           </DialogActions>
         </Dialog>
       </Dialog>
@@ -169,6 +176,7 @@ export default function OrderView() {
             handleContent={setOrders}
             handleDelete={deleteOrder}
             handleFormDialog={setOpen}
+            handleUpdate={setSelectedOrder}
           />
 
           <Button

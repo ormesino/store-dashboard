@@ -3,7 +3,11 @@
 import ContentTable from "@/components/content-table";
 import { ClientDto } from "@/dtos/client.dto";
 import { ClientModel } from "@/models/client.model";
-import { createClient, deleteClient, getClients } from "@/services/client.service";
+import {
+  createClient,
+  deleteClient,
+  getClients,
+} from "@/services/client.service";
 import {
   Box,
   Button,
@@ -20,6 +24,7 @@ import { useEffect, useState } from "react";
 
 export default function ClientView() {
   const [clients, setClients] = useState<ClientDto[]>([]);
+  const [selectedClient, setSelectedClient] = useState<ClientDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
 
@@ -78,6 +83,7 @@ export default function ClientView() {
                     type="text"
                     fullWidth
                     variant="outlined"
+                    value={selectedClient?.name}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -90,6 +96,7 @@ export default function ClientView() {
                     type="email"
                     fullWidth
                     variant="outlined"
+                    value={selectedClient?.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -102,6 +109,7 @@ export default function ClientView() {
                     type="text"
                     fullWidth
                     variant="outlined"
+                    value={selectedClient?.phone}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -114,6 +122,7 @@ export default function ClientView() {
                     type="text"
                     fullWidth
                     variant="outlined"
+                    value={selectedClient?.cpf}
                   />
                 </Grid>
               </Grid>
@@ -123,9 +132,15 @@ export default function ClientView() {
             <Button onClick={() => setOpen(false)} variant="outlined">
               Voltar
             </Button>
-            <Button type="submit" variant="contained" color="success">
-              Cadastrar
-            </Button>
+            {selectedClient ? (
+              <Button type="submit" variant="contained" color="warning">
+                Atualizar
+              </Button>
+            ) : (
+              <Button type="submit" variant="contained" color="success">
+                Cadastrar
+              </Button>
+            )}
           </DialogActions>
         </Dialog>
       </Dialog>
@@ -153,10 +168,14 @@ export default function ClientView() {
             handleContent={setClients}
             handleDelete={deleteClient}
             handleFormDialog={setOpen}
+            handleUpdate={setSelectedClient}
           />
 
           <Button
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setOpen(true);
+              setSelectedClient(null);
+            }}
             variant="contained"
             color="success"
           >

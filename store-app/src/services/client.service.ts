@@ -13,7 +13,7 @@ export const deleteClient = async (id: number): Promise<void> => {
 };
 
 export const createClient = async (client: ClientModel): Promise<void> => {
-  const response = await fetch("http://localhost:8000/api/clients", {
+  await fetch("http://localhost:8000/api/clients", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,3 +21,13 @@ export const createClient = async (client: ClientModel): Promise<void> => {
     body: JSON.stringify(client),
   });
 };
+
+export const updateClient = async (id: number, client: ClientModel): Promise<void> => {
+  await fetch(`http://localhost:8000/api/clients/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(client),
+  });
+}

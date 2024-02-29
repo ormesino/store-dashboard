@@ -21,3 +21,13 @@ export const createProduct = async (product: ProductModel): Promise<void> => {
     body: JSON.stringify(product),
   });
 };
+
+export const updateProduct = async (id: number, product: ProductModel): Promise<void> => {
+  await fetch(`http://localhost:8000/api/products/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(product),
+  });
+};
