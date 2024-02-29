@@ -2,7 +2,7 @@
 
 import ContentTable from "@/components/content-table";
 import { ProductDto } from "@/dtos/product.dto";
-import { getProducts } from "@/services/product.service";
+import { deleteProduct, getProducts } from "@/services/product.service";
 import { Box, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -31,7 +31,12 @@ export default function ProductView() {
       {loading ? (
         <CircularProgress />
       ) : (
-        <ContentTable header={titles} data={products} />
+        <ContentTable
+          header={titles}
+          data={products}
+          handleContent={setProducts}
+          handleDelete={deleteProduct}
+        />
       )}
     </Box>
   );

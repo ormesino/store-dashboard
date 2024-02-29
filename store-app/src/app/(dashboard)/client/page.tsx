@@ -2,7 +2,7 @@
 
 import ContentTable from "@/components/content-table";
 import { ClientDto } from "@/dtos/client.dto";
-import { getClients } from "@/services/client.service";
+import { deleteClient, getClients } from "@/services/client.service";
 import { Box, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -31,7 +31,12 @@ export default function ClientView() {
       {loading ? (
         <CircularProgress />
       ) : (
-        <ContentTable header={titles} data={clients} />
+        <ContentTable
+          header={titles}
+          data={clients}
+          handleContent={setClients}
+          handleDelete={deleteClient}
+        />
       )}
     </Box>
   );

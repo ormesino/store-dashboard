@@ -2,7 +2,7 @@
 
 import ContentTable from "@/components/content-table";
 import { OrderDto } from "@/dtos/order.dto";
-import { getOrders } from "@/services/order.service";
+import { deleteOrder, getOrders } from "@/services/order.service";
 import { Box, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,7 @@ export default function OrdersView() {
         };
       });
       setOrders(incOrders);
-      setLoading(false); 
+      setLoading(false);
     });
   }, []);
 
@@ -48,7 +48,12 @@ export default function OrdersView() {
       {loading ? (
         <CircularProgress />
       ) : (
-        <ContentTable header={titles} data={orders} />
+        <ContentTable
+          header={titles}
+          data={orders}
+          handleContent={setOrders}
+          handleDelete={deleteOrder}
+        />
       )}
     </Box>
   );
