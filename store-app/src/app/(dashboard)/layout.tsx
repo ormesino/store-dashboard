@@ -8,11 +8,9 @@ import PeopleIcon from "@mui/icons-material/People";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
-import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -131,7 +129,7 @@ export default function Dashboard({
         </Toolbar>
         <Divider />
         <List component="nav">
-          <Link href="/clients">
+          <Link href="/client">
             <ListItemButton>
               <ListItemIcon>
                 <PeopleIcon />
@@ -139,7 +137,7 @@ export default function Dashboard({
               <ListItemText primary="Clientes" />
             </ListItemButton>
           </Link>
-          <Link href="/products">
+          <Link href="/product">
             <ListItemButton>
               <ListItemIcon>
                 <LocalMallIcon />
@@ -147,7 +145,7 @@ export default function Dashboard({
               <ListItemText primary="Produtos" />
             </ListItemButton>
           </Link>
-          <Link href="/orders">
+          <Link href="/order">
             <ListItemButton>
               <ListItemIcon>
                 <ReceiptIcon />
@@ -176,11 +174,16 @@ export default function Dashboard({
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Grid container spacing={3}>
-            {children}
-          </Grid>
-        </Container>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: 4,
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </Box>
   );
