@@ -1,5 +1,7 @@
 "use client";
 
+import { Edit } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,21 +10,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import DeleteModal from "../delete-modal";
-import FormModal from "../form-modal";
 
 export default function ContentTable({
   data,
   handleContent,
   handleDelete,
+  handleFormDialog,
   header,
 }: {
   data: Array<Object>;
   handleContent: Function;
   handleDelete: Function;
+  handleFormDialog: Function;
   header: Array<string>;
 }) {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{maxHeight: 600}}>
       <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
@@ -39,7 +42,13 @@ export default function ContentTable({
                 <TableCell key={index}>{value}</TableCell>
               ))}
               <TableCell key="actions">
-                <FormModal />
+                <IconButton
+                  onClick={() => handleFormDialog(true)}
+                  aria-label="edit"
+                  color="warning"
+                >
+                  <Edit />
+                </IconButton>
                 <DeleteModal
                   updateCurrent={handleContent}
                   data={data}
