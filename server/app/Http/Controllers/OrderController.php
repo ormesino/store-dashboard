@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::filter()->get();
+        $orders = Order::with(['client', 'product'])->filter()->get();
         return response()->json($orders);
     }
 
