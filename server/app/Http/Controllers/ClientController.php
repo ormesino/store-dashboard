@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Client;
 
 class ClientController extends Controller
@@ -26,7 +25,6 @@ class ClientController extends Controller
         $client->name = $request->name;
         $client->email = $request->email;
         $client->phone = $request->phone;
-        $client->password = Hash::make($request->password);
         $client->cpf = $request->cpf;
         $client->save();
         return response()->json([
@@ -59,7 +57,6 @@ class ClientController extends Controller
             $client->name = is_null($request->name) ? $client->name : $request->name;
             $client->email = is_null($request->email) ? $client->email : $request->email;
             $client->phone = is_null($request->phone) ? $client->phone : $request->phone;
-            $client->password = is_null($request->password) ? Hash::make($client->password) : $request->password;
             $client->cpf = is_null($request->cpf) ? $client->cpf : $request->cpf;
             $client->save();
             return response()->json($client);

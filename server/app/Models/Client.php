@@ -10,12 +10,13 @@ class Client extends Model
 {
     use HasFactory, FilterQueryString;
 
+    public $timestamps = false;
+
     protected $filters = [
         'like', 'sort', 
     ];
     
-    protected $fillable = ['name', 'email', 'phone', 'password', 'cpf'];
-    protected $hidden = ['password'];
+    protected $fillable = ['name', 'email', 'phone', 'cpf'];
 
     public function orders()
     {

@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, FilterQueryString;
 
+    public $timestamps = false;
+
     protected $filters = [
         'like', 'sort', 
     ];
