@@ -52,6 +52,7 @@ As rotas para acesso das endpoints são as seguintes:
 
 - Frontend: http://localhost:3000/
 - API: http://localhost:8000/
+- Adminer: http://localhost:8080/
 
 Além disso, o arquivo `api-endpoints` possui todos os endpoints da API em PHP para visualização.
 
