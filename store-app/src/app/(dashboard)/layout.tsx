@@ -1,5 +1,6 @@
 "use client";
 
+import { userAtom } from "@/storage/user.storage";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -19,8 +20,11 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useEffect, useState } from "react";
 
 const drawerWidth: number = 240;
 
@@ -77,10 +81,18 @@ export default function Dashboard({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [open, setOpen] = React.useState(true);
+  const [userToken, setUserToken] = useAtom(userAtom);
+  const [open, setOpen] = useState(true);
+  const router = useRouter();
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    if (!userToken) {
+      router.push("/login");
+    }
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -171,7 +183,11 @@ export default function Dashboard({
               <ListItemText primary="Pedidos" />
             </ListItemButton>
           </Link>
-          <ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>

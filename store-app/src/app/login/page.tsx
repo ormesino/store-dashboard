@@ -1,27 +1,42 @@
 "use client";
 
+import { login } from "@/services/admin.service";
+import { userAtom } from "@/storage/user.storage";
 import { CssBaseline } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useAtom } from "jotai";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useEffect } from "react";
 
 export default function Login() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [userToken, setUserToken] = useAtom(userAtom);
+  const router = useRouter();
+
+  useEffect(() => {
+    setUserToken(null);
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const newLogin = {
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+    };
+    const response = await login(newLogin.email, newLogin.password);
+    setUserToken(response.authorisation.token);
+    router.push("/");
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline  />
+      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,

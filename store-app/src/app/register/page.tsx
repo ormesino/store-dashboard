@@ -1,5 +1,6 @@
 "use client";
 
+import { register } from "@/services/admin.service";
 import { CssBaseline } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,14 +11,15 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 
 export default function Register() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get("name"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const newUser = {
+      name: data.get("name") as string,
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+    };
+    await register(newUser);
   };
 
   return (
