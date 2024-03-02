@@ -1,52 +1,67 @@
-# Teste para vaga de Engenheiro full stack Junior
+# Teste Engenheiro Junior - Praqt 
 
-Nesse teste analisaremos seu conhecimento geral, velocidade de desenvolvimento e capacidade de melhoria.
+## Documentação
+O ambiente de desenvolvimento utiliza o docker para subir o banco de dados e um admin para visualizar o banco em tempo real (adminer).
 
-## Instruções
+## Pré-requisitos
+- PHP 8.1
+- Composer
+- Node.js
+- Docker CLI (opcional)
 
-Utilizando o framework PHP Laravel, e um banco de dados relacional SQLite, MySQL ou Postgres, você vai criar uma aplicação de cadastro de pedidos de compra com as seguintes funcionalidades:
+## Comandos
 
-- CRUD de clientes.
-- CRUD de produtos.
-- CRUD de pedidos de compra, com status (Em Aberto, Pago ou Cancelado).
-- Cada CRUD:
-  - conter lista dos itens cadastrado, com filtros e ordenação para tods os campos apresentados.
-  - deve possuir formulários para criação e atualização de seus itens.
-  - deve permitir a deleção de qualquer item de sua lista.
-    
-- API Rest JSON para todos os CRUDS listados.
+Pra iniciar o projeto, é necessário primeiro estar na pasta `server`, inicializando copiando o arquivo `.env.example` para um `.env` a fim de ser utilizado pela aplicação back-end.
 
-## Banco
+```bash
+cp .env.example .env
+```
 
-- O banco de dados deve ser criado utilizando Migrations do framework Laravel, e também utilizar Seeds e Factorys para popular as informações no banco de dados.
-- Implementação das validações necessárias.
+É necessário primeiramente iniciar os _containers_ presentes no arquivo `docker-compose.yaml` que está também na pasta server.
 
-## Tecnologias:
+```bash
+docker compose up -d
+```
 
-- HTML
-- CSS
-- Javascript(Poderá ser utilizado frameworks)
-- Framework Laravel (PHP)
-- Docker (construção do ambiente de desenvolvimento)
+Possuindo o PHP instalado, é necessário também instalar todas as dependências do `composer`
 
-## Entrega
+```bash
+composer install
+```
 
-- Para iniciar o teste, faça um fork deste repositório; **Se você apenas clonar o repositório não vai conseguir fazer push.**
-- Crie uma branch com o seu nome completo;
-- Altere o arquivo teste-engenheiro-junior.md com as informações necessárias para executar o seu teste (comandos, migrations, seeds, etc);
-- Depois de finalizado, envie-nos o pull request;
+Após isso, deve-se migrar o banco de dados presente ainda na pasta `server`, populando o banco de dados.
 
-## Bônus
+```bash
+php artisan migrate:fresh --seed 
+```
 
-- Implementar autenticação de usuário na aplicação.
-- Implementar aplicação de desconto em alguns pedidos de compra.
+Com o banco de dados populado, basta subir a API PHP através do comando abaixo:
 
+```bash
+php artisan serve
+```
 
-## O que iremos analisar
+Possuindo a parte do back-end já pronta, basta acessar a pasta `store-app` e subir a aplicação do front-end.
 
-- Organização do código;
-- Aplicação de design patterns;
-- Separação de módulos e componentes;
-- Legibilidade;
-- Criação do ambiente com Docker.
-- Inovação e melhorias.
+```bash
+npm i
+npm run dev
+```
+
+As rotas para acesso das endpoints são as seguintes:
+
+- Frontend: http://localhost:3000/
+- API: http://localhost:8000/
+- Adminer: http://localhost:8080/
+
+Além disso, o arquivo `api-endpoints` possui todos os endpoints da API em PHP para visualização.
+
+## Dependências
+- [Laravel Filter Query String](https://github.com/mehradsadeghi/laravel-filter-querystring)
+- [Material UI](https://mui.com/material-ui/)
+
+## Próximos passos
+### Front-end
+- Finalizar a funcionalidade de atualização dos registros das tabelas 
+- Implementar a autenticação já feita no back-end
+- Linkar páginas de Login e Registrar
