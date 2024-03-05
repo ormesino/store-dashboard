@@ -29,6 +29,12 @@ Possuindo o PHP instalado, é necessário também instalar todas as dependência
 composer install
 ```
 
+Deve-se rodar o seguinte comando para gerar a chave da API feita em Laravel:
+
+```bash
+php artisan key:generate
+```
+
 Após isso, deve-se migrar o banco de dados presente ainda na pasta `server`, populando o banco de dados.
 
 ```bash
@@ -46,6 +52,13 @@ Possuindo a parte do back-end já pronta, basta acessar a pasta `store-app` e su
 ```bash
 npm i
 npm run dev
+```
+
+Por fim, para utilizar o usuário gerado pelo seed do Laravel, basta logar com as seguintes credenciais:
+
+```
+e-mail: admin@example.com
+senha: admin
 ```
 
 As rotas para acesso das endpoints são as seguintes:
