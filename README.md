@@ -29,10 +29,11 @@ Possuindo o PHP instalado, é necessário também instalar todas as dependência
 composer install
 ```
 
-Deve-se rodar o seguinte comando para gerar a chave da API feita em Laravel:
+Deve-se rodar o seguinte comando para gerar a chave da API feita em Laravel e uma chave JWT para autenticação:
 
 ```bash
 php artisan key:generate
+php artisan jwt:secret
 ```
 
 Após isso, deve-se migrar o banco de dados presente ainda na pasta `server`, populando o banco de dados.
